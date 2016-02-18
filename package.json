@@ -1,0 +1,32 @@
+{
+  "name": "nano-ui-parser",
+  "version": "1.0.0",
+  "description": "indented ui descriptions parser class",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec -u tdd",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot -u tdd",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter dot -u tdd"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "core-assert": "0",
+    "clone": "1",
+    "nano-timer": "1",
+    "nano-json": "1",
+    "mocha": "2",
+    "colors": "0",
+    "istanbul": "0"
+  },
+  "author": "Vladimir Antonov <me@holix.ru>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Holixus/nano-ui-parser.git"
+  },
+  "homepage": "https://github.com/Holixus/nano-ui-parser",
+  "bugs": {
+    "url": "http://github.com/Holixus/nano-ui-parser/issues"
+  },
+  "license": "MIT"
+}
