@@ -1,6 +1,6 @@
 {
   "name": "nano-ui-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "indented ui descriptions parser class",
   "main": "index.js",
   "scripts": {
