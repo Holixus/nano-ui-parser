@@ -7,6 +7,8 @@
 [![Downloads][downloads-image]][downloads-url]
 
 # nano-ui-parser
+
+[![Join the chat at https://gitter.im/Holixus/nano-ui-parser](https://badges.gitter.im/Holixus/nano-ui-parser.svg)](https://gitter.im/Holixus/nano-ui-parser?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Very simple UI descriptions texts parser
 
 ## Usage
