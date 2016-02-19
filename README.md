@@ -29,11 +29,16 @@ Returns `Directive` class tree
 * args {String}
 * children {Array} of the same class children objects. When object hasn't children its filled with `undefined` value.
 
-## tree.enum(callback)
+## tree.getPath()
 
-* function callback(path, args)
-  * path {Array} of 'id's
-  * args {String} arguments of the node
+Returns array of nodes ids from top-root node to this.
+
+## tree.enumChildren(callback)
+
+* function callback(node, id, args)
+  * node {Directive}
+  * id {String} node id
+  * args {String} node arguments
 
 ## About UI files
 

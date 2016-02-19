@@ -114,9 +114,12 @@ ooo\n\
 	test('enum ui', function (done) {
 		var tree = parse_tree(ui_text),
 		    s = '';
-		tree.enum(function (path, args) {
+		function cb(node, id, args) {
+			var path = node.getPath();
 			s += ('        '.slice(0, path.length-1))+path.join('.')+' '+(args || '');
-		});
+			node.enumChildren(cb);
+		}
+		tree.enumChildren(cb);
 		assert.strictEqual(to_str, tree.toString());
 		done();
 	});

@@ -9,6 +9,11 @@ function Directive(id, args) {
 Directive.tab = '  ';
 
 Directive.prototype = {
+	getPath: function () {
+		var upp = this.up ? this.up.getPath() : [];
+		upp.push(this.id);
+		return upp;
+	},
 	toString: function (indent) {
 		if (!indent)
 			indent = '';
@@ -33,21 +38,13 @@ Directive.prototype = {
 		this.children.push(d);
 		d.up = this;
 	},
-	enum: function (cb) {
-		var path = [];
-		function loop(d) {
-			if (!d.children)
-				return;
-			var last = path.push('') - 1;
-			for (var i = 0, ch = d.children, n = ch.length; i < n; ++i) {
-				var sub = ch[i];
-				path[last] = sub.id;
-				cb(path, sub.args)
-				loop(sub);
-			}
-			path.pop();
+	enumChildren: function (cb) {
+		if (!this.children)
+			return;
+		for (var i = 0, ch = this.children, n = ch.length; i < n; ++i) {
+			var sub = ch[i];
+			cb(sub, sub.id, sub.args)
 		}
-		loop(this);
 	}
 };
 
