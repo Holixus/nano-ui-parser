@@ -37,7 +37,14 @@ Returns `Directive` class tree
 
 ## About UI files
 
-
+```
+root arguments
+  sub-element-1 ererw -> werwer
+    sub-sub-element-1 there is any text can be arguments
+    sus-sub-element-2
+  sub-element-2
+    sub-sub-element-1
+```
 
 [bithound-image]: https://www.bithound.io/github/Holixus/nano-ui-parser/badges/score.svg
 [bithound-url]: https://www.bithound.io/github/Holixus/nano-ui-parser
