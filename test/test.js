@@ -116,11 +116,11 @@ ooo\n\
 		    s = '';
 		function cb(node, id, args) {
 			var path = node.getPath();
-			s += ('        '.slice(0, path.length-1))+path.join('.')+' '+(args || '');
+			s += ('        '.slice(0, path.length-1))+path.join('.')+(args ? ' '+args :'')+'\n';
 			node.enumChildren(cb);
 		}
 		tree.enumChildren(cb);
-		assert.strictEqual(to_str, tree.toString());
+		assert.strictEqual(enum_str, s);
 		done();
 	});
 

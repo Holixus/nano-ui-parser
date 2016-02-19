@@ -10,7 +10,9 @@ Directive.tab = '  ';
 
 Directive.prototype = {
 	getPath: function () {
-		var upp = this.up ? this.up.getPath() : [];
+		if (!this.up)
+			return [];
+		var upp = this.up.getPath();
 		upp.push(this.id);
 		return upp;
 	},
