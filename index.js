@@ -16,22 +16,32 @@ Directive.prototype = {
 		upp.push(this.id);
 		return upp;
 	},
-	toString: function (indent) {
+	toString: function (indent, is_ui) {
 		if (!indent)
 			indent = '';
 		if (!this.up)
-			return this.childrenToString(indent);
-		var s = [indent, this.id, '(', this.args || '', ')'].join('');
-		if (this.children)
-			s += ' {\n' + this.childrenToString(indent + Directive.tab) + indent + '}';
+			return this.childrenToString(indent, is_ui);
+		if (is_ui) {
+			var s = this.args ? [indent, this.id, ' ', this.args || ''].join('') : indent + this.id;
+			if (this.children && this.children.length)
+				s += '\n' + this.childrenToString(indent + Directive.tab, is_ui);
+			else
+				s += '\n';
+		} else {
+			var s = [indent, this.id, '(', this.args || '', ')'].join('');
+			if (this.children)
+				s += ' {\n' + this.childrenToString(indent + Directive.tab, is_ui) + indent + '}';
+			s += '\n';
+		}
 		return s;
 	},
-	childrenToString: function (indent) {
+	childrenToString: function (indent, is_ui) {
 		var s = '';
-		if (this.children)
+		if (this.children) {
 			this.children.forEach(function (d) {
-				s += d.toString(indent) + '\n';
+				s += d.toString(indent, is_ui);
 			});
+		}
 		return s;
 	},
 	add: function (d) {

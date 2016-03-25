@@ -54,6 +54,18 @@ menu() {\n\
   }\n\
 }\n\
 ",
+    to_ui_str = "\
+menu\n\
+  h1 some options\n\
+    text\n\
+    text\n\
+    h2\n\
+      text\n\
+    h2\n\
+      text\n\
+  h1\n\
+    notice\n\
+",
     enum_str = "\
 menu\n\
  menu.h1 some options\n\
@@ -72,7 +84,13 @@ suite('parsing', function () {
 
 	test('basic ui toString', function (done) {
 		var tree = parse_tree(ui_text);
-		assert.strictEqual(to_str, tree.toString());
+		assert.strictEqual(tree.toString(), to_str);
+		done();
+	});
+
+	test('basic ui toString (ui)', function (done) {
+		var tree = parse_tree(ui_text);
+		assert.strictEqual(tree.toString('', 1), to_ui_str);
 		done();
 	});
 
@@ -101,13 +119,13 @@ ooo\n\
 
 	test('basic ui childrenToString', function (done) {
 		var tree = parse_tree("menu");
-		assert.strictEqual("", tree.children[0].childrenToString());
+		assert.strictEqual(tree.children[0].childrenToString(), '');
 		done();
 	});
 
 	test('basic ui childrenToString 2', function (done) {
 		var tree = parse_tree(ui_text);
-		assert.strictEqual(to_str, tree.childrenToString());
+		assert.strictEqual(tree.childrenToString(), to_str);
 		done();
 	});
 
@@ -120,7 +138,7 @@ ooo\n\
 			node.enumChildren(cb);
 		}
 		tree.enumChildren(cb);
-		assert.strictEqual(enum_str, s);
+		assert.strictEqual(s, enum_str);
 		done();
 	});
 
