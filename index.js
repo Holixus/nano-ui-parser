@@ -89,3 +89,5 @@ function parse_tree(text) {
 }
 
 module.exports = parse_tree;
+
+parse_tree.Node = Directive;
