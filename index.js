@@ -1,8 +1,9 @@
-function Directive(id, args) {
+function Directive(id, args, srow) {
 	this.id = id;
 	this.args = args;
 	this.children = undefined;
 	this.up = undefined;
+	this.srow = srow;
 	Object.defineProperty(this, 'up', { enumerable: false });
 }
 
@@ -22,7 +23,7 @@ Directive.prototype = {
 		if (!this.up)
 			return this.childrenToString(indent, is_ui);
 		if (is_ui) {
-			var s = this.args ? [indent, this.id, ' ', this.args || ''].join('') : indent + this.id;
+			var s = this.args ? [indent, this.id, ' ', this.args].join('') : indent + this.id;
 			if (this.children && this.children.length)
 				s += '\n' + this.childrenToString(indent + Directive.tab, is_ui);
 			else
@@ -78,7 +79,7 @@ function parse_tree(text) {
 		if (!els)
 			throw(Error(opts.file+'(' + (index+1) + '): Syntax error'));
 
-		var dir = new Directive(els[1], els[2]),
+		var dir = new Directive(els[1], els[2], index),
 		    level = ind[1].length;
 		if (level > indent) {
 			data = last;
