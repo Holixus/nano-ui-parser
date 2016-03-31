@@ -81,7 +81,7 @@ function parse_tree(text) {
 		if (!els)
 			throw(Error(opts.file+'(' + (index+1) + '): Syntax error'));
 
-		var dir = new Directive(els[1], els[2], index),
+		var dir = new Directive(els[1], els[2], index + 1),
 		    level = ind[1].length;
 		if (level > indent) {
 			data = last;
