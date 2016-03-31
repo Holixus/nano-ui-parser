@@ -62,6 +62,8 @@ Directive.prototype = {
 };
 
 function parse_tree(text) {
+	if (typeof text !== 'string')
+		throw TypeError('source is not a string type');
 	var rows = text.split(/\r\n?|\n\r?/),
 	    root = new Directive('root',''),
 	    data = root,

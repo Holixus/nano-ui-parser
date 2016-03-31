@@ -17,6 +17,25 @@ function massive(name, fn, pairs, sradix, dradix) {
 	});
 }
 
+function fail_test(fn, sradix, dradix, args, ret) {
+	test(fn.name+'('+json.js2str(args, sradix)+') -> '+json.js2str(ret.name, dradix)+'', function (done) {
+		assert.throws(function () {
+			if (args instanceof Array)
+				fn.apply(null, args);
+			else
+				fn.call(null, args);
+		}, ret);
+		done();
+	});
+}
+
+function massive_fails(name, fn, pairs, sradix, dradix) {
+	suite(name, function () {
+		for (var i = 0, n = pairs.length; i < n; i += 2)
+			fail_test(fn, sradix, dradix, pairs[i], pairs[i+1]);
+	});
+}
+
 var parse_tree = require('../index.js');
 
 var ui_text = "\
@@ -81,6 +100,16 @@ menu\n\
 
 
 suite('parsing', function () {
+
+	massive_fails('type checks', parse_tree, [
+		null, TypeError,
+		true, TypeError,
+		1, TypeError,
+		undefined, TypeError,
+		function (){}, TypeError,
+		{}, TypeError,
+		[], TypeError
+	]);
 
 	test('basic ui toString', function (done) {
 		var tree = parse_tree(ui_text);
