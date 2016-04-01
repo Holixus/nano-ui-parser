@@ -48,9 +48,11 @@ menu\n\
 		# comment 2\n\
 \n\
 		h2\n\
+		// comment 3\n\
 			text\n\
 \n\
 		h2\n\
+		-- comment 4\n\
 			text\n\
 \n\
 	h1\n\

@@ -1,4 +1,4 @@
-function Directive(id, args, srow) {
+function UINode(id, args, srow) {
 	this.id = id;
 	this.args = args;
 	this.children = undefined;
@@ -7,9 +7,9 @@ function Directive(id, args, srow) {
 	Object.defineProperty(this, 'up', { enumerable: false });
 }
 
-Directive.tab = '  ';
+UINode.tab = '  ';
 
-Directive.prototype = {
+UINode.prototype = {
 	getPath: function () {
 		if (!this.up)
 			return [];
@@ -25,13 +25,13 @@ Directive.prototype = {
 		if (is_ui) {
 			var s = this.args ? [indent, this.id, ' ', this.args].join('') : indent + this.id;
 			if (this.children && this.children.length)
-				s += '\n' + this.childrenToString(indent + Directive.tab, is_ui);
+				s += '\n' + this.childrenToString(indent + UINode.tab, is_ui);
 			else
 				s += '\n';
 		} else {
 			var s = [indent, this.id, '(', this.args || '', ')'].join('');
 			if (this.children)
-				s += ' {\n' + this.childrenToString(indent + Directive.tab, is_ui) + indent + '}';
+				s += ' {\n' + this.childrenToString(indent + UINode.tab, is_ui) + indent + '}';
 			s += '\n';
 		}
 		return s;
@@ -65,7 +65,7 @@ function parse_tree(text) {
 	if (typeof text !== 'string')
 		throw TypeError('source is not a string type');
 	var rows = text.split(/\r\n?|\n\r?/),
-	    root = new Directive('root',''),
+	    root = new UINode('root',''),
 	    data = root,
 	    last = undefined,
 	    indents = [ 0 ];
@@ -74,14 +74,14 @@ function parse_tree(text) {
 	rows.forEach(function (row, index) {
 		var ind = /^([\t\s]*)(.*)$/.exec(row);
 		var row = ind[2];
-		if (!row || row[0] === '#') // comment
+		if (!row || row[0] === '#' || (row[0] === row[1] && (row[0] === '/' || row[0] === '-'))) // '#', '//', '--' comment
 			return ;
 
 		var els = /^([a-z0-9-_$]+)(?:\s*(.*))?$/.exec(row);
 		if (!els)
 			throw(Error(opts.file+'(' + (index+1) + '): Syntax error'));
 
-		var dir = new Directive(els[1], els[2], index + 1),
+		var dir = new UINode(els[1], els[2], index + 1),
 		    level = ind[1].length;
 		if (level > indent) {
 			data = last;
@@ -103,4 +103,4 @@ function parse_tree(text) {
 
 module.exports = parse_tree;
 
-parse_tree.Node = Directive;
+parse_tree.Node = UINode;

@@ -12,9 +12,9 @@ Very simple UI descriptions texts parser
 ## Usage
 
 ```js
-	var parse_tree = require('nano-ui-parser');
+	var ui_parser = require('nano-ui-parser');
 
-	var tree = parse_tree(text);
+	var tree = ui_parser(text);
 
 	console.log(tree.toString());
 ```
@@ -43,10 +43,13 @@ Returns array of nodes ids from top-root node to this.
 ## About UI files
 
 ```
+# comment
 root arguments
+// comment
   sub-element-1 ererw -> werwer
     sub-sub-element-1 there is any text can be arguments
     sus-sub-element-2
+-- comment
   sub-element-2
     sub-sub-element-1
 ```
