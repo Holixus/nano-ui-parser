@@ -43,7 +43,7 @@ menu\n\
 # comment test\n\
 \n\
 	h1 some options\n\
-		text\n\
+		textNode\n\
 		text\n\
 		# comment 2\n\
 \n\
@@ -61,7 +61,7 @@ menu\n\
     to_str = "\
 menu() {\n\
   h1(some options) {\n\
-    text()\n\
+    textNode()\n\
     text()\n\
     h2() {\n\
       text()\n\
@@ -78,7 +78,7 @@ menu() {\n\
     to_ui_str = "\
 menu\n\
   h1 some options\n\
-    text\n\
+    textNode\n\
     text\n\
     h2\n\
       text\n\
@@ -90,7 +90,7 @@ menu\n\
     enum_str = "\
 menu\n\
  menu.h1 some options\n\
-  menu.h1.text\n\
+  menu.h1.textNode\n\
   menu.h1.text\n\
   menu.h1.h2\n\
    menu.h1.h2.text\n\

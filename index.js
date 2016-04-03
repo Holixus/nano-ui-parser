@@ -77,7 +77,7 @@ function parse_tree(text) {
 		if (!row || row[0] === '#' || (row[0] === row[1] && (row[0] === '/' || row[0] === '-'))) // '#', '//', '--' comment
 			return ;
 
-		var els = /^([a-z0-9-_$]+)(?:\s*(.*))?$/.exec(row);
+		var els = /^([a-z0-9-_$]+)(?:\s*(.*))?$/i.exec(row);
 		if (!els)
 			throw(Error(opts.file+'(' + (index+1) + '): Syntax error'));
 
